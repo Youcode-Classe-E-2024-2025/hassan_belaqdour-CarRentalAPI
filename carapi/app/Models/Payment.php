@@ -10,10 +10,15 @@ class Payment extends Model
 {
     use HasFactory, Notifiable;
 
-    // protected $fillable = [
-    //     'rental_id',
-    //     'amount',
-    //     'payment_date',
-    //     'status',
-    // ];
+    protected $fillable = [
+        'rental_id',
+        'amount',
+        'payment_date',
+        'status',
+    ];
+
+    public function rental(){
+        return $this -> belongsTo(Rental::class);
+    }
+
 }
