@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator; // Import the Validator class
+use Illuminate\Support\Facades\Validator;
 
 class CarController extends Controller
 {
@@ -30,12 +30,12 @@ class CarController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422); // Return validation errors with 422 status code
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
 
-        $car = Car::create($request->all()); // Mass assignment
-        return response()->json($car, 201); // 201 Created
+        $car = Car::create($request->all());
+        return response()->json($car, 201);
     }
 
     /**
@@ -59,7 +59,7 @@ class CarController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422); // Return validation errors with 422 status code
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         $car->update($request->all());
@@ -72,6 +72,6 @@ class CarController extends Controller
     public function destroy(Car $car)
     {
         $car->delete();
-        return response()->json(null, 204); // 204 No Content (successful deletion)
+        return response()->json(null, 204);
     }
 }
