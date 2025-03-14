@@ -1,0 +1,213 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Gestion des Voitures",
+        "description": "Documentation de l'API pour la gestion des voitures en location",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/cars": {
+            "get": {
+                "tags": [
+                    "Voitures"
+                ],
+                "summary": "Récupérer la liste des voitures",
+                "operationId": "1fd4f1fdc0da258c5084bcdce4bbe693",
+                "responses": {
+                    "200": {
+                        "description": "Liste des voitures avec pagination"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Voitures"
+                ],
+                "summary": "Ajouter une nouvelle voiture",
+                "operationId": "6f519ab2c9767d4d3b1be7cf8f1287ed",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "make",
+                                    "model",
+                                    "year",
+                                    "price_per_day"
+                                ],
+                                "properties": {
+                                    "make": {
+                                        "type": "string",
+                                        "example": "Toyota"
+                                    },
+                                    "model": {
+                                        "type": "string",
+                                        "example": "Corolla"
+                                    },
+                                    "year": {
+                                        "type": "integer",
+                                        "example": 2022
+                                    },
+                                    "price_per_day": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 35.5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Voiture ajoutée avec succès"
+                    },
+                    "422": {
+                        "description": "Validation échouée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cars/{id}": {
+            "get": {
+                "tags": [
+                    "Voitures"
+                ],
+                "summary": "Récupérer les détails d'une voiture",
+                "operationId": "b222bfa902eefbb6a4a875762081dcbc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la voiture",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails de la voiture"
+                    },
+                    "404": {
+                        "description": "Voiture non trouvée"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Voitures"
+                ],
+                "summary": "Mettre à jour une voiture",
+                "operationId": "1d232cedb5f39024dccd947cddd10087",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la voiture",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "make": {
+                                        "type": "string",
+                                        "example": "Toyota"
+                                    },
+                                    "model": {
+                                        "type": "string",
+                                        "example": "Corolla"
+                                    },
+                                    "year": {
+                                        "type": "integer",
+                                        "example": 2022
+                                    },
+                                    "price_per_day": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 40
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Voiture mise à jour avec succès"
+                    },
+                    "422": {
+                        "description": "Validation échouée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Voitures"
+                ],
+                "summary": "Supprimer une voiture",
+                "operationId": "802b64f09e484fbb1bb3817362d30cc9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la voiture",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Voiture supprimée avec succès"
+                    },
+                    "404": {
+                        "description": "Voiture non trouvée"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Voitures",
+            "description": "Voitures"
+        }
+    ]
+}
